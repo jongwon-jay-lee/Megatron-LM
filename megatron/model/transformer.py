@@ -574,7 +574,7 @@ class ParallelAttention(MegatronModule):
 
             # [sq, b, hp] --> [sq, b, ng, (np/ng + 2) * hn]
             new_tensor_shape = mixed_x_layer.size()[:-1] + (
-                self.num_query_groups_per_partition,
+                self.num_query_groups_per_partition,    # ng 4 = query group 8 // tp 2 
                 (
                     (self.num_attention_heads_per_partition // self.num_query_groups_per_partition + 2)
                     * self.hidden_size_per_attention_head
